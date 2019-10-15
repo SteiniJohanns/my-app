@@ -12,20 +12,22 @@ class App extends Component {
       name: 'Voff',
       value: 100
     };
+    this.updateValues = this.updateValues.bind(this);
   }
 
-  updateValues(event) {
+  updateValues = event => {
+    console.log('The event', event);
     const prevValue = this.state.value;
-    this.setState({ name: this.state.value + 1 });
+    this.setState({ name: event.target.name + 1 });
     this.setState({ value: this.state.value + prevValue });
     console.log(this.name);
-  }
+  };
 
   render() {
     return (
       <div className="App">
         <div className="Left">
-          <Input />
+          <Input onChange={this.updateValues()} />
         </div>
         <div className="Right">
           <OutputInfo name={this.state.name} value={this.state.value} />
